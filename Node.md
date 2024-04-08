@@ -34,3 +34,15 @@ Modification du package.json pour utiliser le module `esm`:
   "type": "module"
 }
 ```
+
+Creation d'un depot Git et premier commit :
+
+```sh
+git init
+touch .gitignore
+echo "node_modules" > .gitignore
+
+git add .
+
+git commit -m "Initial commit"
+```

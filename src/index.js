@@ -1,8 +1,15 @@
 import express from "express";
+import carsRoutes from "./routes/cars.js";
 
 const app = express();
 
 const PORT = process.env.PORT || 3001;
+
+// Middlewares
+// Middleware qui permet de parser les donnees issues d'un formulaire
+app.use(express.json());
+
+app.use("/cars", carsRoutes);
 
 /* 
  Routes definit une route Get sur / qui renvoie un message
@@ -12,7 +19,8 @@ const PORT = process.env.PORT || 3001;
  request et response 
  */
 app.get("/", (request, response) => {
-  response.send("Hello World!");
+  response.json({ message: "Hello World!" });
+  // JSON : Javascript Object Notation
 });
 
 app.listen(PORT, () => {
