@@ -22,3 +22,16 @@ Content-Type: application/json
     "model": "F8 Tributo"
 }
 
+### 
+
+PUT http://localhost:3001/cars/1
+Content-Type: application/json
+
+{
+    "brand": "Aston Martin",
+    "model": "DB11"
+}
+
+###
+
+DELETE http://localhost:3001/cars/1

@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-const mockCars = [
+let mockCars = [
   { id: 1, brand: "Audi", model: "A3" },
   { id: 2, brand: "Renault", model: "Clio" },
   { id: 3, brand: "Peugeot", model: "208" },
@@ -46,9 +46,31 @@ router.post("/", (request, response) => {
 
 // PUT http://localhost:3001/cars/1 creer une route qui
 // permet de modiier une voiture
+router.put("/:id", (request, response) => {
+  const id = parseInt(request.params.id, 10);
+  const bodyContent = request.body;
+  const car = mockCars.find((car) => car.id === id);
+  if (car) {
+    const updatedCar = { ...car, ...bodyContent };
+    mockCars[id - 1] = updatedCar;
+    response.json(updatedCar);
+  } else {
+    response.status(404).json({ message: "Car not found" });
+  }
+});
 
 // DELETE http://localhost:3001/cars/1 creer une route qui
 // permet de supprimer une voiture
+router.delete("/:id", (request, response) => {
+  const id = parseInt(request.params.id, 10);
+  const car = mockCars.find((car) => car.id === id);
+  if (car) {
+    mockCars = mockCars.filter((car) => car.id !== id);
+    response.status(204).end();
+  } else {
+    response.status(404).json({ message: "Car not found" });
+  }
+});
 
 // Ceci est un export default, on peut en avoir
 // qu'un seul par fichier (module)
