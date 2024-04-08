@@ -52,7 +52,8 @@ router.put("/:id", (request, response) => {
   const car = mockCars.find((car) => car.id === id);
   if (car) {
     const updatedCar = { ...car, ...bodyContent };
-    mockCars[id - 1] = updatedCar;
+    const index = mockCars.findIndex((car) => car.id === id);
+    mockCars[index] = updatedCar;
     response.json(updatedCar);
   } else {
     response.status(404).json({ message: "Car not found" });
