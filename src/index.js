@@ -1,7 +1,10 @@
+import "dotenv/config";
 import express from "express";
 import carsRoutes from "./routes/cars.js";
 
 const app = express();
+
+console.log("env: ", process.env.MONGO_STRING);
 
 const PORT = process.env.PORT || 3001;
 
