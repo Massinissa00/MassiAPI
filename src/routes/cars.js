@@ -6,6 +6,7 @@ import {
   getCars,
   udpateCar,
 } from "../controller/cars.js";
+import { body } from "express-validator";
 
 const router = express.Router();
 
@@ -16,7 +17,14 @@ router.get("/", getCars);
 router.get("/:id", getCar);
 
 // POST http://localhost:3001/cars
-router.post("/", createCar);
+router.post(
+  "/",
+  [
+    body("brand").trim().isLength({ max: 20, min: 2 }),
+    body("model").trim().isLength({ min: 2, max: 100 }),
+  ],
+  createCar
+);
 
 // PUT http://localhost:3001/cars/1 creer une route qui
 // permet de modiier une voiture

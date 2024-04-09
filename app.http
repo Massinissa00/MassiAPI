@@ -19,8 +19,8 @@ POST http://localhost:3000/cars
 Content-Type: application/json
 
 {
-    "brand": "Ford",
-    "model": "Mustang"
+    "brand": "F",
+    "model": "K"
 }
 
 ### 

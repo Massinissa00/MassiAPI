@@ -1,5 +1,6 @@
 import { mockCars } from "../data/mock.js";
 import Car from "../models/car.js"; // Import the Car model
+import { validationResult } from "express-validator";
 
 export const getCars = (req, res) => {
   Car.find()
@@ -28,7 +29,8 @@ export const getCar = (req, res) => {
 
 export const createCar = (request, response) => {
   const bodyContent = request.body;
-
+  const errors = validationResult(request);
+  console.log(errors);
   // on cree un nouvelle instance de Car
   const newCar = new Car(bodyContent);
 
