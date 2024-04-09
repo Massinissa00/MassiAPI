@@ -27,6 +27,10 @@ export const getCar = (req, res) => {
     });
 };
 
+export const getError = (req, res) => {
+  throw new Error("This is an error");
+};
+
 export const createCar = (request, response) => {
   const bodyContent = request.body;
   const errors = validationResult(request);

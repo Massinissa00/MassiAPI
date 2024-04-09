@@ -8,6 +8,11 @@ GET http://localhost:3001/health
 
 GET http://localhost:3001/cars
 
+###
+
+GET http://localhost:3000/error
+
+
 
 ###
 
