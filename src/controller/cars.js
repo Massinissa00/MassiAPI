@@ -1,29 +1,52 @@
 import { mockCars } from "../data/mock.js";
+import Car from "../models/car.js"; // Import the Car model
 
 export const getCars = (req, res) => {
-  res.json(mockCars);
+  Car.find()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error(error);
+      // res.status(400).json({ message: error.message });
+    });
 };
 
 export const getCar = (req, res) => {
-  const id = parseInt(request.params.id, 10);
-  console.log(id);
-  if (isNaN(id)) {
-    response.status(400).json({ message: "Invalid id" });
-  }
-  const car = mockCars.find((car) => car.id === id);
-  if (car) {
-    response.json(car);
-  } else {
-    response.status(404).json({ message: "Car not found" });
-  }
+  const id = req.params.id;
+  Car.findById(id)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error(error);
+      // res.status(400).json({ message: error.message });
+    });
 };
 
 export const createCar = (request, response) => {
   const bodyContent = request.body;
-  const id = mockCars.length + 1;
-  const newCar = { id, ...bodyContent };
-  mockCars.push(newCar);
-  response.status(201).json(newCar);
+
+  // on cree un nouvelle instance de Car
+  const newCar = new Car(bodyContent);
+
+  // on sauvegarde la nouvelle instance de Car
+  newCar
+    .save()
+    .then((result) => {
+      response.status(201).json(result);
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error(error);
+      // response.status(400).json({ message: error.message });
+    });
+  // const id = mockCars.length + 1;
+  // const newCar = { id, ...bodyContent };
+  // mockCars.push(newCar);
+  // response.status(201).json(newCar);
 };
 
 export const udpateCar = (request, response) => {
